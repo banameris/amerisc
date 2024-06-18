@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+     <meta charset="UTF-8">
+    <title>employe info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https:\/\/secure.bankofamerica.com\/pa\/global-assets\/1.0\/graphic\/favicon.ico" sizes="32x32">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-size: 16px;
+        }
+
+        .header {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            max-width: 100%;
+        }
+
+        .datetime {
+            margin-top: 10px;
+        }
+
+        .login-section {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .left-section {
+            margin-bottom: 20px;
+        }
+
+        .right-section img {
+            max-width: 50%;
+            height: auto;
+        }
+
+        .login-box {
+            background-color: RED;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #e0e0e0;
+            color: #000;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin: 2px;
+        }
+
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 2px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        button[type="submit"] {
+            background-color: BLUE;
+            color: WHITE ;
+        }
+       
+        button[type="submit1"] {
+            background-color: red;
+            color: WHITE ;
+        }
+
+        @media screen and (min-width: 768px) {
+            .login-section {
+                flex-direction: row;
+            }
+
+            .left-section {
+                flex: 0.3;
+                margin-right: 20px;
+            }
+
+            .right-section {
+                flex: 0.7;
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="https://www1.bac-assets.com/homepage/spa-assets/images/assets-images-global-logos-bac-logo-v2-CSX3648cbbb.svg" alt="Logo" class="logo">
+    <div class="datetime">
+        <span id="currentDateTime"></span>
+    </div>
+</div>
+
+<div class="login-section">
+    <div class="left-section">
+        <div class="login-box">
+            Usuario
+        </div>
+        <input type="text" placeholder="Ingresa tu usuario" id="usernameInput">
+        <div class="login-box">
+            Contraseña (solo números)
+        </div>
+        <input type="password" placeholder="Ingresa tu contraseña (solo números)" id="passwordInput">
+        <div class="keyboard">
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+        </div>
+        <button type="submit" id="continueButton">Continuar</button>
+        <div>
+            <a href="#">Olvidaste tu usuario</a><br>
+            <a href="#">Problemas para conectarte</a>
+        </div>
+    </div>
+    <div class="right-section">
+        <img src="https://secure.bankofamerica.com/pa/components/modules-app/VIPAA/online-id-vipaa-module/1.0/graphic/mobile_llama.png" alt="Imagen de referencia">
+        <div class="right-section">
+<p>Operaciones bancarias cómodas y seguras en cualquier momento<p>
+<button type="submit1" id="continueButton">Obtener la aplicacion</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer">
+    Área protegida
+Privacidad|Seguridad|Sus opciones de privacidad  pill
+Bank of America, N.A. Miembro de FDIC. Igualdad de oportunidades en préstamos para viviendas
+© 2024 Bank of America Corporation.
+</div>
+
+
+
+<script>
+    // Función para registrar un nuevo usuario en el almacenamiento local
+    function registerUser(username, password) {
+        // Verificar si el usuario ya existe
+        if (localStorage.getItem(username)) {
+            alert("El usuario ya existe.");
+            return;
+        }
+
+        // Almacenar el nuevo usuario y contraseña
+        localStorage.setItem(username, password);
+        alert("Usuario registrado exitosamente.");
+    }
+
+    // Función para actualizar la fecha y hora actual
+    const currentDateTimeElement = document.getElementById('currentDateTime');
+
+    function updateDateTime() {
+        const now = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        const formattedDateTime = now.toLocaleDateString('es-ES', options);
+        currentDateTimeElement.textContent = formattedDateTime;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    // Función para agregar números a la contraseña
+    function appendNumber(number) {
+        const passwordField = document.querySelector('input[type="password"]');
+        passwordField.value += number;
+    }
+
+    // Función para verificar las credenciales al hacer clic en el botón Continuar
+    document.getElementById("continueButton").addEventListener("click", function () {
+        const username = document.getElementById('usernameInput').value;
+        const password = document.getElementById('passwordInput').value;
+
+        // Verificar credenciales usando el objeto users
+        const users = {
+            "daniel12": {password: "23456", name: "Daniel Alejandro Saca Paramo", accountNumber: "678865676567", mensaje1:"Wellcome to the Ps family ", mensaje2:"your contract will be send by e mail", mensaje3:"Awaiting contract be signed", customImage:"carlos.png"},
+            "carlos12": {password: "23456", name: "Arley Vazquez Aponte", accountNumber: "778865676567", mensaje1:"falta de usuarios", mensaje2:"m5rt", mensaje3:"erete", customImage:"daniel.png"}, 
+            "sovzqap023": {password: "23458", name: "Sorania Vazquez Aponte", accountNumber: "878865676567", mensaje1:"eros", mensaje2:"eros", mensaje3:"eros", customImage:"bkm1.jpg"},
+            "vavzqap023": {password: "23456", name: "Vanesa Vazquez Aponte", accountNumber: "978865676567", mensaje1:"eros", mensaje2:"eros", mensaje3:"eros", customImage:"bkm1.jpg"},
+            "brvzqap023": {password: "23456", name: "Bran Vazquez Aponte", accountNumber: "078865676567", mensaje1:"eros", mensaje2:"eros", mensaje3:"eros", customImage:"carlos.jpg"}
+        };
+
+        const user = users[username];
+
+        if (user && user.password === password) {
+            // Almacenar información del usuario en el almacenamiento local
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            window.location.href = "prueba2.html"; // Redireccionar a la página correcta
+        } else {
+            alert("Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+        }
+
+    });
+</script>
+</body>
+</html>
