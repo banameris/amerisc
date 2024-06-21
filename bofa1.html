@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" href="https:\/\/secure.bankofamerica.com\/pa\/global-assets\/1.0\/graphic\/favicon.ico" sizes="32x32">
+    <title>online bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f5f5f5, #e0e0e0, #d0d0d0);
+            background-attachment: fixed;
+        }
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        #message {
+            font-size: 20px;
+            color: #003366;
+        }
+        .notification {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            cursor: pointer;
+        }
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 30px;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 200px;
+        }
+        .notification:hover .notification-dropdown {
+            display: block;
+        }
+        .logout {
+            text-align: right;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .account {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ddd;
+        }
+        .account .balance {
+            font-size: 24px;
+        }
+        .new-account {
+            text-align: center;
+            margin: 20px;
+        }
+        .content-box {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+        .content-box img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+        .content-box p {
+            margin: 0;
+        }
+        footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        footer a {
+            text-decoration: none;
+            color: black;
+        }
+        .top-image {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const user = {
+                name: urlParams.get('name') || "Usuario",
+                checkingAccount: { 
+                    number: urlParams.get('checkingAccountNumber') || "0000", 
+                    balance: urlParams.get('checkingAccountBalance') || "$0.00" 
+                },
+                savingsAccount: { 
+                    number: urlParams.get('savingsAccountNumber') || "0000", 
+                    balance: urlParams.get('savingsAccountBalance') || "$0.00" 
+                },
+                messages: [
+                    urlParams.get('message1') || "Mensaje 1",
+                    urlParams.get('message2') || "Mensaje 2",
+                    urlParams.get('message3') || "Mensaje 3"
+                ]
+            };
+
+            function displayMessage() {
+                const now = new Date();
+                const hours = now.getHours();
+                const messageElement = document.getElementById('message');
+                const greeting = hours >= 6 && hours < 18 ? 'Buenos días' : 'Buenas noches';
+                messageElement.textContent = `${greeting}, ${user.name}`;
+            }
+
+            function displayAccounts() {
+                document.getElementById('checking-account').textContent = `Cuenta de Cheques ... ${user.checkingAccount.number}`;
+                document.getElementById('checking-balance').textContent = user.checkingAccount.balance;
+                document.getElementById('savings-account').textContent = `Cuenta de Ahorros ... ${user.savingsAccount.number}`;
+                document.getElementById('savings-balance').textContent = user.savingsAccount.balance;
+            }
+
+            function displayMessages() {
+                const dropdown = document.querySelector('.notification-dropdown');
+                user.messages.forEach(msg => {
+                    const p = document.createElement('p');
+                    p.textContent = msg;
+                    dropdown.appendChild(p);
+                });
+            }
+
+            displayMessage();
+            displayAccounts();
+            displayMessages();
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div id="message"></div>
+        <div class="notification">
+            🔔
+            <div class="notification-dropdown"></div>
+        </div>
+    </header>
+    <img src="https://www2.bac-assets.com/homepage/spa-assets/images/assets-images-global-logos-bac-logo-v2-CSX3648cbbb.svg" alt="Imagen Principal" class="top-image">
+    <div class="logout">
+        <button  onclick="location.href='https://www.ejemplo.com'">Cerrar Sesión</button>
+    </div>
+    <div class="account">
+        <p id="checking-account"></p>
+        <p class="balance" id="checking-balance"></p>
+    </div>
+    <div class="account">
+        <p id="savings-account"></p>
+        <p class="balance" id="savings-balance"></p>
+    </div>
+    <div class="new-account">
+        <p>Abra una cuenta nueva</p>
+        <a href="nueva-cuenta.html">Click aquí</a>
+    </div>
+    <div class="content-box">
+        <a href="https://www.ml.com/"><img src="https://www2.bac-assets.com/homepage/spa-assets/images/assets-images-site-homepage-logos-new_merrill_desktop_logo-CSX5347e4ce.svg" alt="Imagen 1"></a>
+        <p>Invierte de una manera facil con nosotros y genera ganancias ¡que esperas!</p>
+    </div>
+    <div class="content-box">
+        <a href="https://www.zellepay.com/"><img src="https://promotions.bankofamerica.com/content/dam/consumer-marketing/mobile-banking/mobile-banking-gallery-zelle-logo.svg" alt="Imagen 2"></a>
+        <p>Envia dinero desde cualquier lugar con la comodidad de nuestra aplicacion movil</p>
+    </div>
+    <footer>
+        <a href="#">Cuentas</a>
+        <a href="#">Deposite</a>
+        <a href="#">Pague/Transfiera</a>
+        <a href="#">Explore</a>
+        <a href="#">Menú</a>
+    </footer>
+</body>
+</html>
