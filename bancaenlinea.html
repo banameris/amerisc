@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="https:\/\/secure.bankofamerica.com\/pa\/global-assets\/1.0\/graphic\/favicon.ico" sizes="32x32">
+    <link rel="icon" href="https://secure.bankofamerica.com/pa/global-assets/1.0/graphic/favicon.ico" sizes="32x32">
     <title>online bank</title>
     <style>
         body {
@@ -52,6 +52,7 @@
             padding: 20px;
             margin: 10px;
             border: 1px solid #ddd;
+            cursor: pointer; /* Hace que el recuadro sea interactivo */
         }
         .account .balance {
             font-size: 24px;
@@ -93,56 +94,21 @@
             width: 100%;
             height: auto;
         }
+        .notice {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: red;
+            color: white;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const user = {
-                name: urlParams.get('name') || "Usuario",
-                checkingAccount: { 
-                    number: urlParams.get('checkingAccountNumber') || "0000", 
-                    balance: urlParams.get('checkingAccountBalance') || "$0.00" 
-                },
-                savingsAccount: { 
-                    number: urlParams.get('savingsAccountNumber') || "0000", 
-                    balance: urlParams.get('savingsAccountBalance') || "$0.00" 
-                },
-                messages: [
-                    urlParams.get('message1') || "Mensaje 1",
-                    urlParams.get('message2') || "Mensaje 2",
-                    urlParams.get('message3') || "Mensaje 3"
-                ]
-            };
-
-            function displayMessage() {
-                const now = new Date();
-                const hours = now.getHours();
-                const messageElement = document.getElementById('message');
-                const greeting = hours >= 6 && hours < 18 ? 'Buenos días' : 'Buenas noches';
-                messageElement.textContent = `${greeting}, ${user.name}`;
-            }
-
-            function displayAccounts() {
-                document.getElementById('checking-account').textContent = `Cuenta de Cheques ... ${user.checkingAccount.number}`;
-                document.getElementById('checking-balance').textContent = user.checkingAccount.balance;
-                document.getElementById('savings-account').textContent = `Cuenta de Ahorros ... ${user.savingsAccount.number}`;
-                document.getElementById('savings-balance').textContent = user.savingsAccount.balance;
-            }
-
-            function displayMessages() {
-                const dropdown = document.querySelector('.notification-dropdown');
-                user.messages.forEach(msg => {
-                    const p = document.createElement('p');
-                    p.textContent = msg;
-                    dropdown.appendChild(p);
-                });
-            }
-
-            displayMessage();
-            displayAccounts();
-            displayMessages();
-        });
-    </script>
 </head>
 <body>
     <header>
@@ -154,27 +120,32 @@
     </header>
     <img src="https://www2.bac-assets.com/homepage/spa-assets/images/assets-images-global-logos-bac-logo-v2-CSX3648cbbb.svg" alt="Imagen Principal" class="top-image">
     <div class="logout">
-        <button  onclick="location.href='https://www.ejemplo.com'">Cerrar Sesión</button>
+        <button onclick="location.href='bofa1.html'">Cerrar Sesión</button>
     </div>
-    <div class="account">
+    <div class="account" id="checking-details" onclick="toggleCheckingDetails()">
         <p id="checking-account"></p>
         <p class="balance" id="checking-balance"></p>
+        <div id="checking-transactions" style="display: none;">
+            <!-- Aquí se mostrarán los últimos movimientos -->
+        </div>
     </div>
     <div class="account">
         <p id="savings-account"></p>
         <p class="balance" id="savings-balance"></p>
     </div>
     <div class="new-account">
-        <p>Abra una cuenta nueva</p>
-        <a href="nueva-cuenta.html">Click aquí</a>
+        <p>checking account offer
+        You could get<strong> $200</strong>
+        Start by opening a new eligible checking account online through this offer page. You’re in the right place to explore your checking options.</p>
+        <a href="https://promotions.bankofamerica.com/offers/chooseyourchecking200?cm_sp=DEP-Checking-_-Sept.23ProspectCampaign-_-DCB1SZ2G01_SuperHighlights_Checking_200Offer_Sept23_CMSDefault_SHL_t32023Prospect200HpshlCta"><img src="https://promotions.bankofamerica.com/content/dam/consumer-marketing/ecs/checking-offer/cyc200/cyc_dt_790_static_new.jpg" alt="Imagen abajo" class="top-image"></a>
     </div>
     <div class="content-box">
         <a href="https://www.ml.com/"><img src="https://www2.bac-assets.com/homepage/spa-assets/images/assets-images-site-homepage-logos-new_merrill_desktop_logo-CSX5347e4ce.svg" alt="Imagen 1"></a>
-        <p>Invierte de una manera facil con nosotros y genera ganancias ¡que esperas!</p>
+        <p>Invierte de una manera fácil con nosotros y genera ganancias ¡qué esperas!</p>
     </div>
     <div class="content-box">
         <a href="https://www.zellepay.com/"><img src="https://promotions.bankofamerica.com/content/dam/consumer-marketing/mobile-banking/mobile-banking-gallery-zelle-logo.svg" alt="Imagen 2"></a>
-        <p>Envia dinero desde cualquier lugar con la comodidad de nuestra aplicacion movil</p>
+        <p>Envía dinero desde cualquier lugar con la comodidad de nuestra aplicación móvil</p>
     </div>
     <footer>
         <a href="#">Cuentas</a>
@@ -183,5 +154,104 @@
         <a href="#">Explore</a>
         <a href="#">Menú</a>
     </footer>
+    <div class="notice">su cuenta se encuentra bloqueada, debido a falta del pago de los impuestos requeridos / Your account is blocked due to failure to pay the required taxes.</div>
+
+    <script>
+        function toggleCheckingDetails() {
+            const transactionsDiv = document.getElementById('checking-transactions');
+            if (transactionsDiv.style.display === 'none') {
+                transactionsDiv.style.display = 'block';
+                // Aquí puedes agregar código para cargar y mostrar los últimos movimientos
+                displayRecentTransactions(); // Ejemplo de función para mostrar movimientos
+            } else {
+                transactionsDiv.style.display = 'none';
+            }
+        }
+
+        function displayRecentTransactions() {
+            // Aquí simularemos la carga de datos (puedes reemplazar con tu lógica real)
+            const transactions = [
+                { date: '2024-06-25', description: 'Transferencia recibida', amount: '$2710.00' },
+                { date: '2024-06-24', description: 'Tax identification taxes', amount: '$7.99' },
+                { date: '2024-06-22', description: 'REAL STATE TAX', amount: '$2.01' }
+            ];
+
+            const transactionsDiv = document.getElementById('checking-transactions');
+            transactionsDiv.innerHTML = ''; // Limpiamos el contenido actual
+
+            transactions.forEach(transaction => {
+                const transactionElement = document.createElement('div');
+                transactionElement.classList.add('transaction');
+                transactionElement.innerHTML = `
+                    <p><strong>Fecha:</strong> ${transaction.date}</p>
+                    <p><strong>Descripción:</strong> ${transaction.description}</p>
+                    <p><strong>Monto:</strong> ${transaction.amount}</p>
+                    <hr>
+                `;
+                transactionsDiv.appendChild(transactionElement);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            if (currentUser) {
+                const user = {
+                    name: currentUser.name || "Usuario",
+                    checkingAccount: { 
+                        number: currentUser.checkingAccountNumber || "5812", 
+                        balance: currentUser.checkingAccountBalance || "$2700.00" 
+                    },
+                    savingsAccount: { 
+                        number: currentUser.savingsAccountNumber || "5498", 
+                        balance: currentUser.savingsAccountBalance || "$0.00" 
+                    },
+                    messages: [
+                        currentUser.mensaje1 || "Mensaje 1",
+                        currentUser.mensaje2 || "Mensaje 2",
+                        currentUser.mensaje3 || "Mensaje 3"
+                    ]
+                };
+
+                function displayMessage() {
+                    const now = new Date();
+                    const hours = now.getHours();
+                    const messageElement = document.getElementById('message');
+                    const greeting = hours >= 6 && hours < 18 ? 'Buenos días' : 'Buenas noches';
+                    messageElement.textContent = `${greeting}, ${user.name}`;
+                }
+
+                function displayAccounts() {
+                    document.getElementById('checking-account').textContent = `Cuenta de Cheques ... ${user.checkingAccount.number}`;
+                    document.getElementById('checking-balance').textContent = user.checkingAccount.balance;
+                    document.getElementById('savings-account').textContent = `Cuenta de Ahorros ... ${user.savingsAccount.number}`;
+                    document.getElementById('savings-balance').textContent = user.savingsAccount.balance;
+                }
+
+                function displayMessages() {
+                    const dropdown = document.querySelector('.notification-dropdown');
+                    user.messages.forEach(msg => {
+                        const p = document.createElement('p');
+                        p.textContent = msg;
+                        dropdown.appendChild(p);
+                    });
+                }
+
+                displayMessage();
+                displayAccounts();
+                displayMessages();
+            }
+
+            // Función para mostrar el aviso al hacer clic en los enlaces del footer
+            const notice = document.querySelector('.notice');
+            document.querySelectorAll('footer a').forEach(link => {
+                link.addEventListener('click', () => {
+                    notice.style.display = 'block'; // Mostrar el aviso
+                    setTimeout(() => {
+                        notice.style.display = 'none'; // Ocultar el aviso después de 3 segundos
+                    }, 3000); // 3000 milisegundos = 3 segundos
+                });
+            });
+        });
+    </script>
 </body>
 </html>
