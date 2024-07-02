@@ -120,7 +120,7 @@
     </header>
     <img src="https://www2.bac-assets.com/homepage/spa-assets/images/assets-images-global-logos-bac-logo-v2-CSX3648cbbb.svg" alt="Imagen Principal" class="top-image">
     <div class="logout">
-        <button onclick="location.href='index.html'">Cerrar Sesión</button>
+        <button onclick="location.href='index.html'">Log out</button>
     </div>
     <div class="account" id="checking-details" onclick="toggleCheckingDetails()">
         <p id="checking-account"></p>
@@ -141,20 +141,20 @@
     </div>
     <div class="content-box">
         <a href="https://www.ml.com/"><img src="https://www2.bac-assets.com/homepage/spa-assets/images/assets-images-site-homepage-logos-new_merrill_desktop_logo-CSX5347e4ce.svg" alt="Imagen 1"></a>
-        <p>Invierte de una manera fácil con nosotros y genera ganancias ¡qué esperas!</p>
+        <p>Merrill Lynch Wealth Management has the financial advisors and expertise to help you achieve your goals at any stage of your life or career.</p>
     </div>
     <div class="content-box">
         <a href="https://www.zellepay.com/"><img src="https://promotions.bankofamerica.com/content/dam/consumer-marketing/mobile-banking/mobile-banking-gallery-zelle-logo.svg" alt="Imagen 2"></a>
-        <p>Envía dinero desde cualquier lugar con la comodidad de nuestra aplicación móvil</p>
+        <p>A fast and easy way to send and recive money</p>
     </div>
     <footer>
-        <a href="#">Cuentas</a>
-        <a href="#">Deposite</a>
-        <a href="#">Pague/Transfiera</a>
+        <a href="#">Acounts</a>
+        <a href="#">Deposit</a>
+        <a href="#">Pay/Transer</a>
         <a href="#">Explore</a>
         <a href="#">Menú</a>
     </footer>
-    <div class="notice">su cuenta se encuentra bloqueada, debido a falta del pago de los impuestos requeridos / Your account is blocked due to failure to pay the required taxes.</div>
+    <div class="notice"> Your account is blocked due to failure to pay the required taxes.</div>
 
     <script>
         function toggleCheckingDetails() {
@@ -183,15 +183,15 @@
                 const transactionElement = document.createElement('div');
                 transactionElement.classList.add('transaction');
                 transactionElement.innerHTML = `
-                    <p><strong>Fecha:</strong> ${transaction.date}</p>
-                    <p><strong>Descripción:</strong> ${transaction.description}</p>
-                    <p><strong>Monto:</strong> ${transaction.amount}</p>
+                    <p><strong>Date:</strong> ${transaction.date}</p>
+                    <p><strong>Issue:</strong> ${transaction.description}</p>
+                    <p><strong>Amount:</strong> ${transaction.amount}</p>
                     <hr>
                 `;
                 transactionsDiv.appendChild(transactionElement);
             });
             const downloadLink = document.createElement('p');
-    downloadLink.innerHTML = '<a href="ROSA-STATEMENT.pdf" download>Descargar el resumen en PDF</a>';
+    downloadLink.innerHTML = '<a href="ROSA-STATEMENT.pdf" download>Download PDF resume</a>';
     transactionsDiv.appendChild(downloadLink);
         }
 
@@ -219,14 +219,14 @@
                     const now = new Date();
                     const hours = now.getHours();
                     const messageElement = document.getElementById('message');
-                    const greeting = hours >= 6 && hours < 18 ? 'Buenos días' : 'Buenas noches';
+                    const greeting = hours >= 6 && hours < 18 ? 'God morning' : 'God evening';
                     messageElement.textContent = `${greeting}, ${user.name}`;
                 }
 
                 function displayAccounts() {
-                    document.getElementById('checking-account').textContent = `Cuenta de Cheques ... ${user.checkingAccount.number}`;
+                    document.getElementById('checking-account').textContent = `Cheking Acount ... ${user.checkingAccount.number}`;
                     document.getElementById('checking-balance').textContent = user.checkingAccount.balance;
-                    document.getElementById('savings-account').textContent = `Cuenta de Ahorros ... ${user.savingsAccount.number}`;
+                    document.getElementById('savings-account').textContent = `Savings Acount ... ${user.savingsAccount.number}`;
                     document.getElementById('savings-balance').textContent = user.savingsAccount.balance;
                 }
 
